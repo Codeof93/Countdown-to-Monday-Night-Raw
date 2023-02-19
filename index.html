@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Countdown to Monday Night Raw</title>
+	<style>
+		body {
+			background-color: #000000;
+			color: #FF0000;
+			font-family: Arial, sans-serif;
+			font-size: 24px;
+			text-align: center;
+			margin-top: 50px;
+		}
+
+		h1 {
+			font-size: 36px;
+			margin-bottom: 20px;
+		}
+
+		p {
+			font-size: 24px;
+			margin-bottom: 10px;
+		}
+
+		.countdown {
+			display: inline-block;
+			margin: 0 10px;
+			padding: 10px;
+			background-color: #FF0000;
+			color: #000000;
+			border-radius: 5px;
+		}
+
+		#days, #hours, #minutes, #seconds {
+			font-weight: bold;
+		}
+	</style>
+	<script>
+		// Define the target day and time (Monday 8pm)
+		var targetDay = 1; // 0 = Sunday, 1 = Monday, etc.
+		var targetHour = 20; // 24-hour format
+
+		// Function to update the countdown
+		function updateCountdown() {
+			// Get the current date and time
+			var now = new Date();
+
+			// Calculate the time until the target day and time
+			var daysToTarget = (targetDay - now.getDay() + 7) % 7;
+			var timeToTarget = (daysToTarget * 24 + targetHour - now.getHours()) * 60 * 60 -
+			                   now.getMinutes() * 60 - now.getSeconds();
+
+			// Update the HTML elements
+			document.getElementById("days").innerHTML = Math.floor(timeToTarget / (24 * 60 * 60));
+			document.getElementById("hours").innerHTML = Math.floor((timeToTarget % (24 * 60 * 60)) / (60 * 60));
+			document.getElementById("minutes").innerHTML = Math.floor((timeToTarget % (60 * 60)) / 60);
+			document.getElementById("seconds").innerHTML = Math.floor(timeToTarget % 60);
+		}
+
+		// Update the countdown every second
+		setInterval(updateCountdown, 1000);
+	</script>
+</head>
+<body>
+	<h1>Countdown to Monday Night Raw</h1>
+	<p>Time until the next episode:</p>
+	<div class="countdown"><span id="days"></span> days</div>
+	<div class="countdown"><span id="hours"></span> hours</div>
+	<div class="countdown"><span id="minutes"></span> minutes</div>
+	<div class="countdown"><span id="seconds"></span> seconds</div>
+</body>
+</html>
